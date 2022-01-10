@@ -40,9 +40,9 @@ namespace MikisColorTools
         {
             float C, X, m;
             float[] rgbPrime = new float[] { 0f, 0f, 0f };
-            C = (1 - (float)Math.Abs(Convert.ToDecimal(2 * brightness - 1))) * saturation;
-            X = C * (1 - (float)Math.Abs((hue / 60) % 2 - 1));
-            m = brightness - (C / 2);
+            C = (1f - (float)Math.Abs(Convert.ToDecimal(2f * brightness - 1f))) * saturation;
+            X = C * (1f - (float)Math.Abs((hue / 60f) % 2f - 1f));
+            m = brightness - (C / 2f);
 
             if (hue >= 0f && hue < 60f)
             {
@@ -69,9 +69,9 @@ namespace MikisColorTools
                 rgbPrime = new float[] { C, 0f, X };
             }
 
-            return Color.FromArgb(alpha, (int)((rgbPrime[0] + m) * 255),
-                (int)((rgbPrime[1] + m) * 255),
-                (int)((rgbPrime[2] + m) * 255));
+            return Color.FromArgb(alpha, (int)((rgbPrime[0] + m) * 255f),
+                (int)((rgbPrime[1] + m) * 255f),
+                (int)((rgbPrime[2] + m) * 255f));
         }
 
         /// <summary>
@@ -79,9 +79,9 @@ namespace MikisColorTools
         /// </summary>
         /// <param name="color">The Color structure at which the complementary Color structure is calculated.</param>
         /// <returns>The complementary Color structure.</returns>
-        public static Color GetComplementaryColor_SystemDrawingColor(Color color)
+        public static Color GetComplementaryColor(Color color)
         {
-            float hue = (color.GetHue() + 180f) / 360f;
+            float hue = (color.GetHue() + 180f) % 360f;
 
             return ColorFromAhsl(hue, color.GetSaturation(), color.GetBrightness(), color.A);
         }

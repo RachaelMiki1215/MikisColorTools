@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>RachaelMiki1215</Authors>
+    <Company />
+    <Description>.NET 5.0 class library extending functionality of System.</Description>
   </PropertyGroup>
 
 </Project>
