@@ -39,7 +39,7 @@ namespace MikisColorTools
         /// <param name="brightness">The brightness of the color from 0.0 to 1.0.</param>
         /// <param name="alpha">The transparency of the color from 1 to 255. 255 is opaque and 0 is transparent.</param>
         /// <returns>The Color structure.</returns>
-        public static Color ColorFromAhsl(float hue, float saturation, float brightness, byte alpha = 255)
+        public static Color GetColorFromAhsl(float hue, float saturation, float brightness, byte alpha = 255)
         {
             float C, X, m;
             float[] rgbPrime = new float[] { 0f, 0f, 0f };
@@ -86,7 +86,7 @@ namespace MikisColorTools
         {
             float hue = (color.GetHue() + 180f) % 360f;
 
-            return ColorFromAhsl(hue, color.GetSaturation(), color.GetBrightness(), color.A);
+            return GetColorFromAhsl(hue, color.GetSaturation(), color.GetBrightness(), color.A);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace MikisColorTools
                     }
                     else
                     {
-                        colors.Add(ColorFromAhsl((hue + (degreeInc * (float)i)) % 360f, 
+                        colors.Add(GetColorFromAhsl((hue + (degreeInc * (float)i)) % 360f, 
                             baseColor.GetSaturation(), baseColor.GetBrightness(), baseColor.A));
                     }
                 }
