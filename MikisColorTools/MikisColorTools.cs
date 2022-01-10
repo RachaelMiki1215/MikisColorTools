@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace MikisColorTools
 {
@@ -27,6 +28,9 @@ namespace MikisColorTools
         //    return (float)0.1;
         //}
 
+        // TODO: Add ChangeBrightness method.
+
+        // Based on conversion formula provided in https://www.rapidtables.com/convert/color/hsl-to-rgb.html.
         /// <summary>
         /// Gets the System.Drawing.Color structure from the HSL (hue-saturation-brightness) model and A (alpha) value.
         /// </summary>
@@ -35,7 +39,6 @@ namespace MikisColorTools
         /// <param name="brightness">The brightness of the color from 0.0 to 1.0.</param>
         /// <param name="alpha">The transparency of the color from 1 to 255. 255 is opaque and 0 is transparent.</param>
         /// <returns>The Color structure.</returns>
-        // Based on conversion formula provided in https://www.rapidtables.com/convert/color/hsl-to-rgb.html.
         public static Color ColorFromAhsl(float hue, float saturation, float brightness, byte alpha = 255)
         {
             float C, X, m;
@@ -86,21 +89,43 @@ namespace MikisColorTools
             return ColorFromAhsl(hue, color.GetSaturation(), color.GetBrightness(), color.A);
         }
 
-        // TODO: Add ChangeBrightness method for sysDraw.Color.
-
-        // TODO: Add ChangeBrightness method for sysMedia.Color as well.
-
-        // Based on conversion formula provided in https://www.rapidtables.com/convert/color/rgb-to-cmyk.html.
         /// <summary>
-        /// Gets the K (key) component value of this System.Drawing.Color structure in the CMYK color model.
+        /// Gets an array of n numbers System.Drawing.Color structs which are evenly spaced around the color wheel.
         /// </summary>
-        /// <param name="color">The System.Drawing.Color structure which the K (key) component should be extracted from.</param>
-        /// <returns>The K (key) component value of this color.</returns>
-        public static float K(Color color)
+        /// <param name="baseColor">The base color which the color scheme should be generated for.</param>
+        /// <param name="colorCount">The number (n) of colors to be included in the array, including baseColor.</param>
+        /// <returns></returns>
+        public static Color[] GetNEvenlySpacedColorScheme(Color baseColor, int colorCount)
         {
-            float[] floatRGB = FloatRGB(color);
+            if (colorCount == 1)
+            {
+                return new Color[] { baseColor };
+            }
+            else if (colorCount == 2)
+            {
+                return new Color[] { baseColor, GetComplementaryColor(baseColor) };
+            }
+            else
+            {
+                List<Color> colors = new();
+                float degreeInc = 360f / (float)colorCount;
+                float hue = baseColor.GetHue();
 
-            return (float)(1 - floatRGB.Max());
+                for (int i = 0; i < colorCount; i++)
+                {
+                    if (i == 0)
+                    {
+                        colors.Add(baseColor);
+                    }
+                    else
+                    {
+                        colors.Add(ColorFromAhsl((hue + (degreeInc * (float)i)) % 360f, 
+                            baseColor.GetSaturation(), baseColor.GetBrightness(), baseColor.A));
+                    }
+                }
+
+                return colors.ToArray();
+            }
         }
 
         // Based on conversion formula provided in https://www.rapidtables.com/convert/color/rgb-to-cmyk.html.
@@ -142,5 +167,17 @@ namespace MikisColorTools
             return (1 - floatRGB[2] - K(color)) / (1 - K(color));
         }
 
+        // Based on conversion formula provided in https://www.rapidtables.com/convert/color/rgb-to-cmyk.html.
+        /// <summary>
+        /// Gets the K (key) component value of this System.Drawing.Color structure in the CMYK color model.
+        /// </summary>
+        /// <param name="color">The System.Drawing.Color structure which the K (key) component should be extracted from.</param>
+        /// <returns>The K (key) component value of this color.</returns>
+        public static float K(Color color)
+        {
+            float[] floatRGB = FloatRGB(color);
+
+            return (float)(1 - floatRGB.Max());
+        }
     }
 }
