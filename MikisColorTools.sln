@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikisColorTools", "MikisColorTools\MikisColorTools.csproj", "{5928C2FB-92A5-4E4E-9FFA-AE43BFE81AEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{57CF315C-5E93-4557-BD97-FC0DBA85BFC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5928C2FB-92A5-4E4E-9FFA-AE43BFE81AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5928C2FB-92A5-4E4E-9FFA-AE43BFE81AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5928C2FB-92A5-4E4E-9FFA-AE43BFE81AEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57CF315C-5E93-4557-BD97-FC0DBA85BFC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57CF315C-5E93-4557-BD97-FC0DBA85BFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57CF315C-5E93-4557-BD97-FC0DBA85BFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57CF315C-5E93-4557-BD97-FC0DBA85BFC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
