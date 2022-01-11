@@ -9,7 +9,7 @@ namespace MikisColorTools
     {
         private static float[] FloatRGB(Color color)
         {
-            return new float[] { color.R / 255, color.G / 255, color.B / 255 };
+            return new float[] { (int)color.R / 255f, (int)color.G / 255f, (int)color.B / 255f };
         }
 
         // TODO: Determine luminance calculation methods which could be used.
