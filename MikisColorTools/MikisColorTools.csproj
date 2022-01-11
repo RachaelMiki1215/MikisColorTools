@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -6,7 +6,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>RachaelMiki1215</Authors>
     <Company />
-    <Description>.NET 5.0 class library extending functionality of System.</Description>
+    <Description>.NET 5.0 class library extending functionality of System.Drawing.Color.</Description>
+    <PackageProjectUrl>https://github.com/RachaelMiki1215/MikisColorTools</PackageProjectUrl>
+    <PackageReleaseNotes>* (Initial Release)</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
