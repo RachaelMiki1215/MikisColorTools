@@ -28,7 +28,78 @@ namespace MikisColorTools
         //    return (float)0.1;
         //}
 
-        // TODO: Add ChangeBrightness method.
+        /// <summary>
+        /// Changes hue of System.Drawing.Colorstruct by factor hueDelta and returns product.
+        /// </summary>
+        /// <param name="color">Base color to be changed.</param>
+        /// <param name="hueDelta">The hue difference.</param>
+        /// <returns>Color which the hue is changed.</returns>
+        public static Color ChangeHue(Color color, float hueDelta)
+        {
+            if (hueDelta % 360f == 0f)
+            {
+                return color;
+            }
+            else
+            {
+                return GetColorFromAhsl((color.GetHue() + hueDelta) % 360f, 
+                    color.GetSaturation(), color.GetBrightness(), color.A);
+            }
+        }
+
+        /// <summary>
+        /// Changes saturation of System.Drawing.Color struct by factor saturationDelta and returns product.
+        /// </summary>
+        /// <param name="color">Base color to be changed.</param>
+        /// <param name="saturationDelta">The saturation difference. Number <0 decreases saturation and number >0 increases saturation brightness.</param>
+        /// <returns>Color which the saturation is changed.</returns>
+        public static Color ChangeSaturation(Color color, float saturationDelta)
+        {
+            if (saturationDelta == 0f)
+            {
+                return color;
+            }
+            else if (color.GetSaturation() + saturationDelta <= 0f)
+            {
+                return GetColorFromAhsl(color.GetHue(), 0f, color.GetBrightness(), color.A);
+            }
+            else if (color.GetSaturation() + saturationDelta <= 0f)
+            {
+                return GetColorFromAhsl(color.GetHue(), 0f, color.GetBrightness(), color.A);
+            }
+            else
+            {
+                return GetColorFromAhsl(color.GetHue(), color.GetSaturation() + saturationDelta, 
+                    color.GetBrightness(), color.A);
+            }
+        }
+
+        /// <summary>
+        /// Changes brightness of System.Drawing.Color struct by factor brighnessDelta and returns product.
+        /// </summary>
+        /// <param name="color">Base color to be changed.</param>
+        /// <param name="brightnessDelta">The brightness difference. Number <0 decreases brightness and number >0 increases brightness.</param>
+        /// <returns>Color which the brightness is changed.</returns>
+        public static Color ChangeBrightness(Color color, float brightnessDelta)
+        {
+            if (brightnessDelta == 0f)
+            {
+                return color;
+            }
+            else if (color.GetHue() + brightnessDelta <= 0f)
+            {
+                return Color.Black;
+            }
+            else if (color.GetHue() + brightnessDelta >= 1f)
+            {
+                return Color.White;
+            }
+            else
+            {
+                return GetColorFromAhsl(color.GetHue(), color.GetSaturation(), 
+                    color.GetBrightness() + brightnessDelta, color.A);
+            }
+        }
 
         // Based on conversion formula provided in https://www.rapidtables.com/convert/color/hsl-to-rgb.html.
         /// <summary>
