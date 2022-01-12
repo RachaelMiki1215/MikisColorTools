@@ -8,7 +8,8 @@
     <Company />
     <Description>.NET 5.0 class library extending functionality of System.Drawing.Color.</Description>
     <PackageProjectUrl>https://github.com/RachaelMiki1215/MikisColorTools</PackageProjectUrl>
-    <PackageReleaseNotes>* (Initial Release)</PackageReleaseNotes>
+    <PackageReleaseNotes>* Added method GetHexColorCode() in IMikisColorTools interface.</PackageReleaseNotes>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
 </Project>
