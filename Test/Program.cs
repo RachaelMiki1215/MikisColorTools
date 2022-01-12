@@ -25,6 +25,8 @@ namespace Test
                 Console.WriteLine(string.Format("Triadic: ({0}, {1}, {2})", c.R, c.G, c.B));
             }
 
+            Console.WriteLine(IMikisColorTools.GetHexColorCode(color));
+
             Console.ReadKey();
         }
     }
