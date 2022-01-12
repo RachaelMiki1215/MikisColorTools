@@ -29,6 +29,17 @@ namespace MikisColorTools
         //}
 
         /// <summary>
+        /// Gets the hexadecimal color code string for a System.Drawing.Color struct.
+        /// </summary>
+        /// <param name="color">The color for which the string would be generated.</param>
+        /// <returns>The hexadecimmal color code string.</returns>
+        public static string GetHexColorCode(Color color)
+        {
+            return "#" + Convert.ToString(color.R, 16) + Convert.ToString(color.G, 16) 
+                + Convert.ToString(color.R, 16);
+        }
+
+        /// <summary>
         /// Changes hue of System.Drawing.Colorstruct by factor hueDelta and returns product.
         /// </summary>
         /// <param name="color">Base color to be changed.</param>
