@@ -28,6 +28,7 @@ namespace MikisColorTools
         //    return (float)0.1;
         //}
 
+        // Based on color conversion formula provided in https://www.rapidtables.com/convert/color/rgb-to-hex.html.
         /// <summary>
         /// Gets the hexadecimal color code string for a System.Drawing.Color struct.
         /// </summary>
