@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MikisColorTools
 {
-    public interface IMikisColorTools
+    public static class IMikisColorTools
     {
         private static float[] FloatRGB(Color color)
         {
@@ -36,8 +36,8 @@ namespace MikisColorTools
         /// <returns>The hexadecimmal color code string.</returns>
         public static string GetHexColorCode(Color color)
         {
-            return "#" + Convert.ToString(color.R, 16) + Convert.ToString(color.G, 16) 
-                + Convert.ToString(color.R, 16);
+            return string.Format("#{0}{1}{2}", Convert.ToString(color.R, 16), 
+                Convert.ToString(color.G, 16), Convert.ToString(color.B, 16));
         }
 
         /// <summary>
@@ -52,11 +52,9 @@ namespace MikisColorTools
             {
                 return color;
             }
-            else
-            {
-                return GetColorFromAhsl((color.GetHue() + hueDelta) % 360f, 
-                    color.GetSaturation(), color.GetBrightness(), color.A);
-            }
+
+            return GetColorFromAhsl((color.GetHue() + hueDelta) % 360f, 
+                color.GetSaturation(), color.GetBrightness(), color.A);
         }
 
         /// <summary>
@@ -79,11 +77,9 @@ namespace MikisColorTools
             {
                 return GetColorFromAhsl(color.GetHue(), 0f, color.GetBrightness(), color.A);
             }
-            else
-            {
-                return GetColorFromAhsl(color.GetHue(), color.GetSaturation() + saturationDelta, 
-                    color.GetBrightness(), color.A);
-            }
+
+            return GetColorFromAhsl(color.GetHue(), color.GetSaturation() + saturationDelta, 
+                color.GetBrightness(), color.A);
         }
 
         /// <summary>
@@ -106,11 +102,9 @@ namespace MikisColorTools
             {
                 return Color.White;
             }
-            else
-            {
-                return GetColorFromAhsl(color.GetHue(), color.GetSaturation(), 
-                    color.GetBrightness() + brightnessDelta, color.A);
-            }
+
+            return GetColorFromAhsl(color.GetHue(), color.GetSaturation(), 
+                color.GetBrightness() + brightnessDelta, color.A);
         }
 
         // Based on conversion formula provided in https://www.rapidtables.com/convert/color/hsl-to-rgb.html.
@@ -180,7 +174,11 @@ namespace MikisColorTools
         /// <returns></returns>
         public static Color[] GetNEvenlySpacedColorScheme(Color baseColor, int colorCount)
         {
-            if (colorCount == 1)
+            if (colorCount < 1)
+            {
+                return new Color[] {};
+            }
+            else if (colorCount == 1)
             {
                 return new Color[] { baseColor };
             }
@@ -188,27 +186,25 @@ namespace MikisColorTools
             {
                 return new Color[] { baseColor, GetComplementaryColor(baseColor) };
             }
-            else
+
+            List<Color> colors = new();
+            float degreeInc = 360f / (float)colorCount;
+            float hue = baseColor.GetHue();
+
+            for (int i = 0; i < colorCount; i++)
             {
-                List<Color> colors = new();
-                float degreeInc = 360f / (float)colorCount;
-                float hue = baseColor.GetHue();
-
-                for (int i = 0; i < colorCount; i++)
+                if (i == 0)
                 {
-                    if (i == 0)
-                    {
-                        colors.Add(baseColor);
-                    }
-                    else
-                    {
-                        colors.Add(GetColorFromAhsl((hue + (degreeInc * (float)i)) % 360f, 
-                            baseColor.GetSaturation(), baseColor.GetBrightness(), baseColor.A));
-                    }
+                    colors.Add(baseColor);
                 }
-
-                return colors.ToArray();
+                else
+                {
+                    colors.Add(GetColorFromAhsl((hue + (degreeInc * (float)i)) % 360f, 
+                        baseColor.GetSaturation(), baseColor.GetBrightness(), baseColor.A));
+                }
             }
+
+            return colors.ToArray();
         }
 
         // Based on conversion formula provided in https://www.rapidtables.com/convert/color/rgb-to-cmyk.html.
