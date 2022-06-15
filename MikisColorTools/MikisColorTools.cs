@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MikisColorTools
 {
-    public static class IMikisColorTools
+    public static class MikisColorTools
     {
         private static float[] FloatRGB(Color color)
         {

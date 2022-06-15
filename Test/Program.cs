@@ -12,22 +12,22 @@ namespace Test
             Console.WriteLine(string.Format("LightCoral: ({0}, {1}, {2}, {3})", color.R, color.G, color.B, color.A));
             Console.WriteLine();
 
-            Color compColor = IMikisColorTools.GetComplementaryColor(color);
+            Color compColor = MikisColorTools.MikisColorTools.GetComplementaryColor(color);
             Console.WriteLine(string.Format("Complementary: ({0}, {1}, {2}, {3})", compColor.R, compColor.G, compColor.B, compColor.A));
             Console.WriteLine();
 
-            Console.WriteLine(string.Format("CMYK: ({0}, {1}, {2}, {3})", IMikisColorTools.C(color), 
-                IMikisColorTools.M(color), IMikisColorTools.Y(color), IMikisColorTools.K(color)));
+            Console.WriteLine(string.Format("CMYK: ({0}, {1}, {2}, {3})", MikisColorTools.MikisColorTools.C(color),
+                MikisColorTools.MikisColorTools.M(color), MikisColorTools.MikisColorTools.Y(color), MikisColorTools.MikisColorTools.K(color)));
             Console.WriteLine();
 
-            Color[] triadicColors = IMikisColorTools.GetNEvenlySpacedColorScheme(color, 3);
+            Color[] triadicColors = MikisColorTools.MikisColorTools.GetNEvenlySpacedColorScheme(color, 3);
             foreach (Color c in triadicColors)
             {
                 Console.WriteLine(string.Format("Triadic: ({0}, {1}, {2})", c.R, c.G, c.B));
             }
             Console.WriteLine();
 
-            Console.WriteLine("Hex Code: " + IMikisColorTools.GetHexColorCode(color));
+            Console.WriteLine("Hex Code: " + MikisColorTools.MikisColorTools.GetHexColorCode(color));
 
             Console.ReadKey();
         }
