@@ -166,6 +166,11 @@ namespace MikisColorTools
             return GetColorFromAhsl(hue, color.GetSaturation(), color.GetBrightness(), color.A);
         }
 
+        public static Color GetInverseColor(Color color)
+        {
+            return Color.FromArgb(color.A, 255 - color.R, 255 - color.G, 255 - color.B);
+        }
+
         /// <summary>
         /// Gets an array of n numbers System.Drawing.Color structs which are evenly spaced around the color wheel.
         /// </summary>
